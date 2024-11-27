@@ -10,10 +10,9 @@ function useScrollTop(threshold = 100) {
       } else {
         setScrolled(false);
       }
-
-      window.addEventListener("scroll", handelScroll);
-      return () => window.removeEventListener("scroll", handelScroll);
     };
+    window.addEventListener("scroll", handelScroll);
+    return () => window.removeEventListener("scroll", handelScroll);
   }, [threshold]);
   return scrolled;
 }

@@ -3,9 +3,9 @@ import Navbar from "./_components/navbar";
 
 function LayoutMarketing({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <div className="h-full dark:bg-[#1f1f1f]">
       <Navbar />
-      {children}
+      <main className="h-full pt-32">{children}</main>
     </div>
   );
 }
