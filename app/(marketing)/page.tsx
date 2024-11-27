@@ -1,9 +1,19 @@
 import { Button } from "@/components/ui/button";
+import Heading from "./_components/heading";
+import Heroes from "./_components/heroes";
+import Footer from "./_components/footer";
 
 export default function Home() {
   return (
-    <div className="p-10 bg-slate-600 hover:bg-primary/90">
-      <Button variant={"myButton"}>Click Me</Button>
+    <div className="min-h-full flex flex-col dark:bg-[#1f1f1f]">
+      <div
+        className="flex flex-col items-center justify-center
+      md:justify-start text-center gap-y-8 flex-1"
+      >
+        <Heading />
+        <Heroes />
+      </div>
+      <Footer />
     </div>
   );
 }
