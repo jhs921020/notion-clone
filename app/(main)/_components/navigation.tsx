@@ -2,8 +2,11 @@
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import UserItem from "./user-item";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 function Navigation() {
   const router = useRouter(); /* navigate to a new route */
@@ -23,6 +26,8 @@ function Navigation() {
     useState(false); /* State to track if the sidebar is reset... */
   const [isCollapsed, setIsCollapsed] =
     useState(isMobile); /* State to track if the sidebar is... */
+
+  const documents = useQuery(api.documents.getSideBar, {});
 
   const collapse = () => {
     if (sideBarRef.current && navBarRef.current) {
@@ -46,11 +51,11 @@ function Navigation() {
   const resetWidth = () => {
     if (sideBarRef.current && navBarRef.current) {
       setIsCollapsed(false);
-      setIsCollapsed(true);
+      setIsResetting(true);
       sideBarRef.current.style.width = isMobile ? "100%" : "240px";
       navBarRef.current.style.setProperty(
         "width",
-        isMobile ? "100%" : "calc(100% - 240px)"
+        isMobile ? "100%" : "calc(100%-240px)"
       );
       navBarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
       setTimeout(() => {
@@ -96,6 +101,20 @@ function Navigation() {
     document.removeEventListener("mouseup", handleMouseUp);
   };
 
+  useEffect(() => {
+    if (isMobile) {
+      collapse();
+    } else {
+      resetWidth();
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile) {
+      collapse();
+    }
+  }, [pathName, isMobile]);
+
   return (
     <>
       <aside
@@ -119,10 +138,14 @@ function Navigation() {
         </div>
 
         {/* Some Actions */}
-        <div>Some Actions</div>
+        <div>
+          <UserItem />
+        </div>
 
         {/* Documents List */}
-        <div>Documents List</div>
+        <div className="mt-4">
+          {documents?.map((doc) => <p key={doc._id}>{doc.title}</p>)}
+        </div>
 
         {/* Handle for resizing the sidebar */}
         <div
@@ -136,7 +159,7 @@ function Navigation() {
       <div
         ref={navBarRef}
         className={cn(
-          "absolute top-0 left-60 z-[99999] w-[calc(100%-240px)]",
+          "absolute top-0 left-60 z-[99999] w-[calc(100%-240px)] ",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-full left-0"
         )}
