@@ -23,15 +23,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import Navbar from "./navbar";
-/* import TrashBox from "./trash-box";
+import TrashBox from "./trash-box";
 import UseSearch from "@/hooks/use-search";
-import { useSetting } from "@/hooks/use-setting"; */
+import { useSetting } from "@/hooks/use-setting";
+import Navbar from "./navbar";
 
 function Navigation() {
   const router = useRouter();
-  /* const settings = useSetting();
-  const search = UseSearch(); */
+  const settings = useSetting();
+  const search = UseSearch();
   const params = useParams();
   const pathName = usePathname(); // Get the current pathname
   const isMobile = useMediaQuery("(max-width: 768px)"); // Check if the screen width is 768px or less (mobile view)
@@ -169,9 +169,9 @@ function Navigation() {
         <div>
           <UserItem /> {/* Render the UserItem component */}
           {/* Render the Search item */}
-          {/* <Item lable="Search" icon={Search} isSearch onClick={search.onOpen} /> */}
+          <Item lable="Search" icon={Search} isSearch onClick={search.onOpen} />
           {/* Render the Settings item */}
-          {/* <Item lable="Setting" icon={Settings} onClick={settings.onOpen} /> */}
+          <Item lable="Setting" icon={Settings} onClick={settings.onOpen} />
           {/* Render the New Page item */}
           <Item
             onClick={handleCreateDocument}
@@ -186,7 +186,7 @@ function Navigation() {
               side={isMobile ? "bottom" : "right"}
               className="w-72 p-0"
             >
-              {/* <TrashBox /> */}
+              <TrashBox />
             </PopoverContent>
           </Popover>
         </div>

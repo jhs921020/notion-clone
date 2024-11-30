@@ -1,16 +1,15 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/clerk-react";
 import { useMutation } from "convex/react";
 import { PlusCircle } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
+import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-function MainPage() {
+function DocumentsPage() {
   const router = useRouter();
   const { user } = useUser();
   const createDocument = useMutation(api.documents.createDocument);
@@ -23,9 +22,10 @@ function MainPage() {
     toast.promise(promise, {
       loading: "Creating A New Node...",
       success: "Node Created",
-      error: "Failed to create Node",
+      error: "Failed to Create Node",
     });
   };
+
   return (
     <div className="min-h-[100vh] flex flex-col items-center justify-center space-y-4">
       <Image
@@ -42,9 +42,8 @@ function MainPage() {
         alt={"empty"}
         className="dark:block hidden"
       />
-
       <h2 className="text-lg font-medium">
-        Welcome to {user?.firstName}&apos;s Notion
+        Welcom to {user?.firstName}&apos;s Notion
       </h2>
       <Button onClick={onCreateDocument}>
         <PlusCircle className="w-4 h-4 mr-2" />
@@ -54,4 +53,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default DocumentsPage;

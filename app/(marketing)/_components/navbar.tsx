@@ -1,31 +1,32 @@
 "use client";
-import React from "react";
-import Logo from "./logo";
-import { ModeToggle } from "@/components/mode-toggle";
+import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
-import useScrollTop from "@/hooks/use-scroll-top";
+import React from "react";
+import Logo from "./Logo";
+import { ModeToggle } from "@/components/mode-toggle";
 import { useConvexAuth } from "convex/react";
-import Spinner from "@/components/spinner";
-import { SignInButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
+import Spinner from "@/components/spinner";
 import Link from "next/link";
 
-function Navbar() {
+function NavBar() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const scrolled = useScrollTop();
+
   return (
     <div
       className={cn(
-        "z-50 bg-background dark:bg-[#1f1f1f] fixed top-0 flex items-center w-full px-6 py-4",
+        "z-50 bg-background dark:bg-[#1f1f1f] fixed top-0 flex items-center w-full px-6 py-4 ",
         scrolled && "shadow-sm border-b"
       )}
     >
       <Logo />
       <div
         className="md:ml-auto md:justify-end flex justify-between
-      items-center md:w-fit w-full gap-x-2"
+       items-center md:w-fit w-full gap-x-2"
       >
-        {isLoading && <Spinner size={"lg"} />}
+        {isLoading && <Spinner />}
         {!isAuthenticated && !isLoading && (
           <>
             <SignInButton>
@@ -41,7 +42,7 @@ function Navbar() {
         {isAuthenticated && !isLoading && (
           <>
             <Button variant={"ghost"} size={"sm"}>
-              <Link href="/documents">Enter Notion</Link>
+              <Link href="/decoments">Enter Notion</Link>
             </Button>
             <UserButton afterSwitchSessionUrl="/" />
           </>
@@ -52,4 +53,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBar;

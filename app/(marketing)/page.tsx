@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import Heading from "./_components/heading";
-import Heroes from "./_components/heroes";
-import Footer from "./_components/footer";
+import Image from "next/image";
+import Heading from "./_components/Heading";
+import Heroes from "./_components/Heroes";
+import Footer from "./_components/Footer";
 
-export default function Home() {
+const MarketingPage = () => {
   return (
     <div className="min-h-full flex flex-col dark:bg-[#1f1f1f]">
       <div
@@ -13,7 +14,9 @@ export default function Home() {
         <Heading />
         <Heroes />
       </div>
+
       <Footer />
     </div>
   );
-}
+};
+export default MarketingPage;

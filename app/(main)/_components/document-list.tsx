@@ -81,6 +81,7 @@ function DocumentList({
             lable={document.title} // The title of the document
             icon={FileIcon} // The icon for the document
             onClick={() => onRedirect(document._id)} // Navigate to the document's page when clicked
+            documentIcon={document.icon} // Icon for the document (if available)
             active={params.documentId === document._id} // Highlight the active document
             expanded={expanded[document._id]} // Check if the document is expanded or collapsed
             onExpand={() => onExpand(document._id)} // Pass the expand/collapse function to the document

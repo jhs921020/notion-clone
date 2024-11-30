@@ -1,13 +1,13 @@
 import React from "react";
-import Navbar from "./_components/navbar";
+import NavBar from "./_components/NavBar";
 
-function LayoutMarketing({ children }: { children: React.ReactNode }) {
+const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full dark:bg-[#1f1f1f]">
-      <Navbar />
+      <NavBar />
       <main className="h-full pt-32">{children}</main>
     </div>
   );
-}
+};
 
-export default LayoutMarketing;
+export default MarketingLayout;

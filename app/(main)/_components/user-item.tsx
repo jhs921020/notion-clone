@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { ChevronsLeftRight } from "lucide-react";
 import React from "react";
 
@@ -30,8 +30,7 @@ function UserItem() {
           <ChevronsLeftRight className="rotate-90 ml-2 text-muted-foreground h-4 w-4" />
         </div>
       </DropdownMenuTrigger>
-
-      <DropdownMenuContent className="w-80" align="start" alignOffset={11}>
+      <DropdownMenuContent className="w-80 " align="start" alignOffset={11}>
         <div className="flex flex-col space-y-4 p-2">
           <p className="text-xs font-medium leading-none text-muted-foreground">
             {user?.emailAddresses[0].emailAddress}
@@ -52,7 +51,7 @@ function UserItem() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           asChild
-          className="w-full cursor-pointer text-muted-foreground"
+          className="w-full cursor-pointer text-muted-foreground "
         >
           <SignOutButton>LogOut</SignOutButton>
         </DropdownMenuItem>
